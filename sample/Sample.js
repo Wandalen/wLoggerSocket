@@ -1,7 +1,7 @@
 
-let _ = require( 'wloggersocket' );
+let LoggerSocket = require( 'wloggersocket' );
 
 /**/
 
-___
-
+loggerSocket = new LoggerSocket();
+loggerSocket.outputTo( console );
