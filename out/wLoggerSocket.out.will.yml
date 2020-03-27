@@ -151,6 +151,10 @@ submodule:
     path: 'npm:///wuribasic'
     autoExporting: 0
     enabled: 0
+  websocket:
+    path: 'npm:///websocket'
+    autoExporting: 0
+    enabled: 0
 reflector:
   reflect.proto.debug.raw:
     src:
@@ -893,6 +897,10 @@ module:
         enabled: 0
       wUriBasic:
         path: 'npm:///wuribasic'
+        autoExporting: 0
+        enabled: 0
+      websocket:
+        path: 'npm:///websocket'
         autoExporting: 0
         enabled: 0
     reflector:
