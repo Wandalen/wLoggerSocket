@@ -60,6 +60,11 @@ function form()
 {
   var self = this;
 
+  if( _.strIs( self.serverPath ) )
+  self.serverPath = _.uri.parse( self.serverPath );
+
+  _.assert( _.longHas( [ 'ws', 'wss' ], self.serverPath.protocol ), `Unsupported protocol ${self.serverPath.protocol}` );
+
   let opts =
   {
     httpServer : self.httpServer,
@@ -88,12 +93,14 @@ function SocketServerOpen( o )
 
   let WebSocketServer = require( 'websocket' ).server;
   let Http = require( 'http' );
-  let parsedUri = _.uri.parse( o.serverPath );
+
+  if( _.strIs( o.serverPath ) )
+  o.serverPath = _.uri.parse( o.serverPath );
 
   if( !o.httpServer )
   {
-    if( !parsedUri.port )
-    parsedUri.port = 80;
+    if( !o.serverPath.port )
+    o.serverPath.port = 80;
     o.httpServer = Http.createServer( function( request, response, next )
     {
       debugger;
@@ -122,7 +129,7 @@ function SocketServerOpen( o )
   {
     // console.log( 'socketServer request' ); debugger;
 
-    if( request.resource !== parsedUri.resourcePath )
+    if( request.resource !== o.serverPath.resourcePath )
     return request.reject();
 
     if( 0 )
@@ -168,7 +175,7 @@ var Aggregates =
 {
   httpServer : null,
   socketServer : null,
-  serverPath : 'http://127.0.0.1:5000/log/',
+  serverPath : 'ws://127.0.0.1:5000/log/',
 }
 
 var Associates =
