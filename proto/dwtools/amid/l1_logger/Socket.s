@@ -35,7 +35,7 @@ function finit()
 {
   var self = this;
   self.unform();
-  Parent.prototype.finit.call( self,o );
+  Parent.prototype.finit.call( self );
 }
 
 //
@@ -43,7 +43,7 @@ function finit()
 function init( o )
 {
   var self = this;
-  Parent.prototype.init.call( self,o );
+  Parent.prototype.init.call( self, o );
 }
 
 //
@@ -51,7 +51,21 @@ function init( o )
 function unform()
 {
   var self = this;
-  _.assert( 0, 'not implemented' );
+
+  if( self.socketServer )
+  {
+    if( self.owningSocketServer )
+    self.socketServer.shutDown();
+    self.socketServer = null;
+  }
+
+  if( self.httpServer )
+  {
+    if( self.owningHttpServer )
+    self.httpServer.close();
+    self.httpServer = null;
+  }
+
 }
 
 //
@@ -117,17 +131,14 @@ function SocketServerOpen( o )
 
   o.socketServer.on( 'close', function()
   {
-    // console.log( 'socketServer close' );
   });
 
   o.socketServer.on( 'connect', function()
   {
-    // console.log( 'socketServer connect' );
   });
 
   o.socketServer.on( 'request', function( request )
   {
-    // console.log( 'socketServer request' ); debugger;
 
     if( request.resource !== o.serverPath.resourcePath )
     return request.reject();
@@ -139,7 +150,6 @@ function SocketServerOpen( o )
 
     connection.on( 'message', function( message )
     {
-      // console.log( 'socketServer message' ); debugger
       _.assert( message.type === 'utf8' );
       let parsed = JSON.parse( message.utf8Data );
       if( o.onReceive )
@@ -148,7 +158,6 @@ function SocketServerOpen( o )
 
     connection.on( 'close', function( connection )
     {
-      // console.log( 'socketServer close' ); debugger;
     });
 
   });
@@ -169,12 +178,15 @@ SocketServerOpen.defaults =
 
 var Composes =
 {
+
 }
 
 var Aggregates =
 {
   httpServer : null,
+  owningHttpServer : 1,
   socketServer : null,
+  owningSocketServer : 1,
   serverPath : 'ws://127.0.0.1:5000/log/',
 }
 
