@@ -1,6 +1,6 @@
 {
   "name" : "wloggersocket", 
-  "version" : "0.3.11", 
+  "version" : "0.3.12", 
   "description" : "Inherit class Logger, extending it to receive data from websocket", 
   "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
   "license" : "MIT", 
@@ -21,7 +21,8 @@
     "wTools" : "alpha", 
     "wLogger" : "alpha", 
     "wuribasic" : "alpha", 
-    "websocket" : "1.0.31"
+    "websocket" : "1.0.31", 
+    "ws" : "7.2.3"
   }, 
   "devDependencies" : { "wloggersocket" : "file:.", "wTesting" : "alpha" }, 
   "keywords" : [ "wTools" ]
