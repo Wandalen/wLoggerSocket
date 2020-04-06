@@ -17,10 +17,10 @@ if( typeof module !== 'undefined' )
 
 }
 
-var _global = _global_;
-var _ = _global_.wTools;
-var Parent = _.PrinterTop;
-var Self = function wLoggerSocketReceiver( o )
+let _global = _global_;
+let _ = _global_.wTools;
+let Parent = _.PrinterTop;
+let Self = function wLoggerSocketReceiver( o )
 {
   return _.workpiece.construct( Self, this, arguments );
 }
@@ -33,7 +33,7 @@ Self.shortName = 'LoggerSocketReceiver';
 
 function finit()
 {
-  var self = this;
+  let self = this;
   self.unform();
   Parent.prototype.finit.call( self );
 }
@@ -42,7 +42,7 @@ function finit()
 
 function init( o )
 {
-  var self = this;
+  let self = this;
   Parent.prototype.init.call( self, o );
 }
 
@@ -50,12 +50,19 @@ function init( o )
 
 function unform()
 {
-  var self = this;
+  let self = this;
+
+  self._unforming = 1;
 
   if( self.socketServer )
   {
     if( self.owningSocketServer )
-    self.socketServer.shutDown();
+    {
+      if( _.routineIs( self.socketServer.shutDown ) )
+      self.socketServer.shutDown();
+      else
+      self.socketServer.close();
+    }
     self.socketServer = null;
   }
 
@@ -72,7 +79,11 @@ function unform()
 
 function form()
 {
-  var self = this;
+  let self = this;
+
+  _.assert( self._que === null );
+
+  self._que = [];
 
   if( _.strIs( self.serverPath ) )
   self.serverPath = _.uri.parse( self.serverPath );
@@ -87,23 +98,131 @@ function form()
     onReceive,
   }
 
-  self.SocketServerOpen( opts );
+  self.SocketServerOpenWithModuleWebsocket( opts );
+  // self.SocketServerOpenWithModuleWs( opts );
   _.mapExtend( self, _.mapBut( opts, [ 'onReceive' ] ) );
+
+  /* */
 
   function onReceive( op )
   {
-    _.assert( _.routineIs( self[ op.data.methodName ] ), `Unknown method ${op.data.methodName}` );
-    self[ op.data.methodName ].apply( self, op.data.args );
+    _.assert( _.routineIs( self[ op.structure.methodName ] ), `Unknown logger method ${op.structure.methodName}` );
+
+    // op.structure.serverTime = _.time.now();
+    // self._que.push( op );
+    //
+    // if( self._queTimer === null )
+    // self._queRun();
+
+    self[ op.structure.methodName ].apply( self, op.structure.args );
+
+  }
+
+  /* */
+
+}
+
+//
+
+function _queRun()
+{
+  let self = this;
+
+  _.assert( self._que !== null );
+  _.assert( self._queTimer === null );
+  _.assert( self._queTime === null );
+  _.assert( arguments.length === 0 );
+
+  if( self._unforming )
+  return;
+
+  self._queContinue();
+}
+
+//
+
+function _queContinue()
+{
+  let self = this;
+
+  _.assert( self._que !== null );
+  _.assert( self._queTimer === null );
+  _.assert( arguments.length === 0 );
+
+  if( self._unforming )
+  return self._queStopEnd();
+  if( !self._que.length )
+  return self._queStopEnd();
+
+  self._queTime = _.time.now();
+  self._queTimer = _.time.begin( self.period, () => self._queTimeEnd() );
+
+}
+
+//
+
+function _queStopEnd()
+{
+  let self = this;
+  if( self._queTimer )
+  self._queTimer = null;
+  if( self._queTime )
+  self._queTime = null;
+}
+
+//
+
+function _queTimeEnd()
+{
+  let self = this;
+
+  _.assert( arguments.length === 0 );
+
+  self._queTimer = null;
+  self._queLog( self._que, _.time.now() - self.period / 2 );
+  self._queContinue();
+
+}
+
+//
+
+function _queLog( que, beforeTime )
+{
+  let self = this;
+  let subjects = Object.create( null );
+
+  _.assert( arguments.length === 2 );
+
+  for( let i = 0 ; i < que.length ; i++ )
+  {
+    let op = que[ i ];
+    let subjectArray = subjects[ op.structure.subject ] = subjects[ op.structure.subject ] || [];
+    subjectArray.push( op );
+  }
+
+  for( let subject in subjects )
+  {
+    let que2 = subjects[ subject ];
+    que2.sort( ( a, b ) => a.structure.id - b.structure.id );
+    while( que2.length )
+    {
+      let op = que2[ 0 ];
+      if( op.structure.serverTime > beforeTime )
+      break;
+      que2.splice( 0, 1 );
+      _.arrayRemoveOnce( que, op );
+      self[ op.structure.methodName ].apply( self, op.structure.args );
+    }
   }
 
 }
 
 //
 
-function SocketServerOpen( o )
+function SocketServerOpenWithModuleWebsocket( o )
 {
 
-  _.routineOptions( SocketServerOpen, arguments );
+  _.routineOptions( SocketServerOpenWithModuleWebsocket, arguments );
 
   let WebSocketServer = require( 'websocket' ).server;
   let Http = require( 'http' );
@@ -146,14 +265,14 @@ function SocketServerOpen( o )
     if( 0 )
     return request.reject();
 
-    var connection = request.accept( null, request.origin );
+    let connection = request.accept( null, request.origin );
 
     connection.on( 'message', function( message )
     {
       _.assert( message.type === 'utf8' );
       let parsed = JSON.parse( message.utf8Data );
       if( o.onReceive )
-      o.onReceive({ data : parsed });
+      o.onReceive({ structure : parsed });
     });
 
     connection.on( 'close', function( connection )
@@ -164,7 +283,72 @@ function SocketServerOpen( o )
 
 }
 
-SocketServerOpen.defaults =
+SocketServerOpenWithModuleWebsocket.defaults =
+{
+  httpServer : null,
+  socketServer : null,
+  serverPath : null,
+  onReceive : null,
+}
+
+//
+
+function SocketServerOpenWithModuleWs( o )
+{
+
+  _.routineOptions( SocketServerOpenWithModuleWs, arguments );
+
+  let Ws = require( 'ws' );
+  let Http = require( 'http' );
+
+  if( _.strIs( o.serverPath ) )
+  o.serverPath = _.uri.parse( o.serverPath );
+
+  if( !o.httpServer )
+  {
+    if( !o.serverPath.port )
+    o.serverPath.port = 80;
+    o.httpServer = Http.createServer( function( request, response, next )
+    {
+      debugger;
+    });
+    o.httpServer.listen( o.port, function() {} );
+  }
+
+  if( o.socketServer === null )
+  o.socketServer = new Ws.Server
+  ({
+    clientTracking : false,
+    noServer : true,
+  });
+
+  o.httpServer.on( 'upgrade', function( request, socket, head )
+  {
+    o.socketServer.handleUpgrade( request, socket, head, function( connection )
+    {
+      o.socketServer.emit( 'connection', connection, request );
+    });
+  });
+
+  o.socketServer.on( 'connection', function( connection, request )
+  {
+
+    connection.on( 'message', function( message )
+    {
+      let parsed = JSON.parse( message );
+      if( o.onReceive )
+      o.onReceive({ structure : parsed });
+    });
+
+    connection.on( 'close', function( connection )
+    {
+    });
+
+  });
+
+}
+
+SocketServerOpenWithModuleWs.defaults =
 {
   httpServer : null,
   socketServer : null,
@@ -176,34 +360,46 @@ SocketServerOpen.defaults =
 // relations
 // --
 
-var Composes =
+let Composes =
 {
 
 }
 
-var Aggregates =
+let Aggregates =
 {
   httpServer : null,
   owningHttpServer : 1,
   socketServer : null,
   owningSocketServer : 1,
-  serverPath : 'ws://127.0.0.1:5000/log/',
+  period : 200,
+  serverPath : 'ws://127.0.0.1:25000/log/',
 }
 
-var Associates =
+let Associates =
 {
 }
 
-var Statics =
+let Restricts =
 {
-  SocketServerOpen,
+
+  _que : null,
+  _queTime : null,
+  _queTimer : null,
+  _unforming : 0,
+
+}
+
+let Statics =
+{
+  SocketServerOpenWithModuleWebsocket,
+  SocketServerOpenWithModuleWs,
 }
 
 // --
 // prototype
 // --
 
-var Proto =
+let Proto =
 {
 
   finit,
@@ -211,11 +407,19 @@ var Proto =
   unform,
   form,
 
-  SocketServerOpen,
+  _queRun,
+  _queContinue,
+  _queStopEnd,
+  _queTimeEnd,
+  _queLog,
+
+  SocketServerOpenWithModuleWebsocket,
+  SocketServerOpenWithModuleWs,
 
   Composes,
   Aggregates,
   Associates,
+  Restricts,
   Statics,
 
 }
