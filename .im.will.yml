@@ -18,6 +18,10 @@ submodule :
     path : npm:///websocket
     enabled : 0 # submodule
 
+  ws :
+    path : npm:///ws
+    enabled : 0 # submodule
+
 path :
 
   in : '.'

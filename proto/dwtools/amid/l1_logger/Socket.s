@@ -82,7 +82,9 @@ function form()
   let self = this;
 
   _.assert( self._que === null );
+  _.assert( self._startTime === null );
 
+  self._startTime = _.time.now();
   self._que = [];
 
   if( _.strIs( self.serverPath ) )
@@ -98,8 +100,8 @@ function form()
     onReceive,
   }
 
-  self.SocketServerOpenWithModuleWebsocket( opts );
-  // self.SocketServerOpenWithModuleWs( opts );
+  // self.SocketServerOpenWithModuleWebsocket( opts );
+  self.SocketServerOpenWithModuleWs( opts );
   _.mapExtend( self, _.mapBut( opts, [ 'onReceive' ] ) );
 
   /* */
@@ -108,13 +110,18 @@ function form()
   {
     _.assert( _.routineIs( self[ op.structure.methodName ] ), `Unknown logger method ${op.structure.methodName}` );
 
-    // op.structure.serverTime = _.time.now();
-    // self._que.push( op );
-    //
-    // if( self._queTimer === null )
-    // self._queRun();
+    if( self.quing )
+    {
+      op.structure.serverTime = _.time.now();
+      self._que.push( op );
 
-    self[ op.structure.methodName ].apply( self, op.structure.args );
+      if( self._queTimer === null )
+      self._queRun();
+    }
+    else
+    {
+      self[ op.structure.methodName ].apply( self, op.structure.args );
+    }
 
   }
 
@@ -211,7 +218,10 @@ function _queLog( que, beforeTime )
       break;
       que2.splice( 0, 1 );
       _.arrayRemoveOnce( que, op );
-      self[ op.structure.methodName ].apply( self, op.structure.args );
+      let prefix = [];
+      if( self.debugging )
+      prefix = [ op.structure.clientTime - self._startTime, op.structure.serverTime - self._startTime, op.structure.id ];
+      self[ op.structure.methodName ].apply( self, [ ... prefix, ... op.structure.args ] );
     }
   }
 
@@ -362,7 +372,6 @@ SocketServerOpenWithModuleWs.defaults =
 
 let Composes =
 {
-
 }
 
 let Aggregates =
@@ -371,7 +380,9 @@ let Aggregates =
   owningHttpServer : 1,
   socketServer : null,
   owningSocketServer : 1,
-  period : 200,
+  quing : 1,
+  debugging : 0,
+  period : 100,
   serverPath : 'ws://127.0.0.1:25000/log/',
 }
 
@@ -386,6 +397,7 @@ let Restricts =
   _queTime : null,
   _queTimer : null,
   _unforming : 0,
+  _startTime : null,
 
 }
 
