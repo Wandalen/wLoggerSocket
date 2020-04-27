@@ -1,29 +1,29 @@
 {
-  "name" : "wloggersocket", 
-  "version" : "0.3.25", 
-  "description" : "Inherit class Logger, extending it to receive data from websocket", 
-  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>", 
-  "license" : "MIT", 
-  "main" : "proto/dwtools/amid/l1_logger/Socket.s", 
-  "files" : [ "proto/dwtools/amid/l1_logger", "proto/dwtools/Tools.s" ], 
-  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" }, 
-  "repository" : 
+  "name" : "wloggersocket",
+  "version" : "0.3.26",
+  "description" : "Inherit class Logger, extending it to receive data from websocket",
+  "author" : "Kostiantyn Wandalen <wanalen@willbe.so>",
+  "license" : "MIT",
+  "main" : "proto/dwtools/amid/l1_logger/Socket.s",
+  "files" : [ "proto/dwtools/amid/l1_logger", "proto/dwtools/Tools.s" ],
+  "scripts" : { "test" : "wtest .run proto", "docgen" : "wdocgen .build proto" },
+  "repository" :
   {
-    "type" : "git", 
+    "type" : "git",
     "url" : "https ://github.com/Wandalen/wLoggerSocket.git"
-  }, 
-  "bugs" : 
+  },
+  "bugs" :
   {
     "url" : "https ://github.com/Wandalen/wLoggerSocket/issues"
-  }, 
-  "dependencies" : 
+  },
+  "dependencies" :
   {
-    "wTools" : "alpha", 
-    "wLogger" : "alpha", 
-    "wuribasic" : "alpha", 
-    "websocket" : "1.0.31", 
+    "wTools" : "gamma",
+    "wLogger" : "gamma",
+    "wuribasic" : "gamma",
+    "websocket" : "1.0.31",
     "ws" : "7.2.5"
-  }, 
-  "devDependencies" : { "wloggersocket" : "file:.", "wTesting" : "alpha" }, 
+  },
+  "devDependencies" : { "wloggersocket" : "file:.", "wTesting" : "gamma" },
   "keywords" : [ "wTools" ]
 }
