@@ -73,6 +73,9 @@ function unform()
     self.httpServer = null;
   }
 
+  if( self._queTimer )
+  self._queStopEnd();
+
 }
 
 //
@@ -184,6 +187,9 @@ function _queTimeEnd()
   let self = this;
 
   _.assert( arguments.length === 0 );
+
+  if( !self._queTimer )
+  return;
 
   self._queTimer = null;
   self._queLog( self._que, _.time.now() - self.period / 2 );
