@@ -21,8 +21,7 @@
     "wTools" : "",
     "wLogger" : "",
     "wuribasic" : "",
-    "websocket" : "",
-    "ws" : ""
+    "ws" : "7.3.0"
   },
   "devDependencies" : { "wTesting" : "", "wloggersocket" : "file:." },
   "keywords" : [ "wTools" ]

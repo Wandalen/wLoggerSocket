@@ -14,12 +14,12 @@ submodule :
     path : npm:///wuribasic
     enabled : 0 # submodule
 
-  websocket :
-    path : npm:///websocket
-    enabled : 0 # submodule
+  # websocket :
+  #   path : npm:///websocket
+  #   enabled : 0 # submodule
 
   ws :
-    path : npm:///ws
+    path : npm:///ws#7.3.0
     enabled : 0 # submodule
 
 path :
