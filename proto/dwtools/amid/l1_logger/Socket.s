@@ -19,7 +19,7 @@ if( typeof module !== 'undefined' )
 
 let _global = _global_;
 let _ = _global_.wTools;
-let Parent = _.PrinterTop;
+let Parent = _.LoggerTop;
 let Self = wLoggerSocketReceiver;
 function wLoggerSocketReceiver( o )
 {
