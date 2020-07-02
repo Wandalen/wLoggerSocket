@@ -1471,6 +1471,4 @@ module:
       ../.im.will.yml:
         hash: ccb7628a81376b9911728b73cd38f12f
         size: 4877
-      wLoggerSocket.out.will.yml:
-        hash: 8e58d7b11b085b721174e37782707dab
-        size: 37569
+      wLoggerSocket.out.will.yml: *ref_0
