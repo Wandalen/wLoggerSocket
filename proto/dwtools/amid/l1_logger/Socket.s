@@ -20,6 +20,7 @@ if( typeof module !== 'undefined' )
 let _global = _global_;
 let _ = _global_.wTools;
 let Parent = _.Logger;
+// let Parent = _.LoggerTop; /* Dmytro : deprecated namespace */
 let Self = wLoggerSocketReceiver;
 function wLoggerSocketReceiver( o )
 {
