@@ -109,7 +109,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: ../proto/dwtools/amid/l1_logger/Socket.s
+        path: ../proto/wtools/amid/l1_logger/Socket.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -119,13 +119,13 @@ module:
           debug: debug
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/amid/l1_logger.test/___'
+        path: '{path::out.*=1}/source/wtools/amid/l1_logger.test/___'
       entry.out.raw.debug.release:
         criterion:
           debug: release
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/amid/l1_logger.test/___'
+        path: '{path::out.*=1}/source/wtools/amid/l1_logger.test/___'
       entry.out.compiled.debug.debug:
         criterion:
           debug: debug
@@ -152,13 +152,13 @@ module:
         path:
           - ../proto
           - ../proto/Integration.test.s
-          - ../proto/dwtools
-          - ../proto/dwtools/Tools.s
-          - ../proto/dwtools/abase
-          - ../proto/dwtools/amid
-          - ../proto/dwtools/amid/l1_logger
-          - ../proto/dwtools/amid/l1_logger/Socket.s
-          - ../proto/dwtools/atop
+          - ../proto/wtools
+          - ../proto/wtools/Tools.s
+          - ../proto/wtools/abase
+          - ../proto/wtools/amid
+          - ../proto/wtools/amid/l1_logger
+          - ../proto/wtools/amid/l1_logger/Socket.s
+          - ../proto/wtools/atop
     submodule:
       wTools:
         path: 'npm:///wTools'
@@ -889,7 +889,7 @@ module:
       entry.proto.no.tests:
         criterion:
           tests: no.tests
-        path: proto/dwtools/amid/l1_logger/Socket.s
+        path: proto/wtools/amid/l1_logger/Socket.s
       entry.proto.only.tests:
         criterion:
           tests: only.tests
@@ -899,13 +899,13 @@ module:
           debug: debug
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/amid/l1_logger.test/___'
+        path: '{path::out.*=1}/source/wtools/amid/l1_logger.test/___'
       entry.out.raw.debug.release:
         criterion:
           debug: release
           raw: raw
           content: prime
-        path: '{path::out.*=1}/source/dwtools/amid/l1_logger.test/___'
+        path: '{path::out.*=1}/source/wtools/amid/l1_logger.test/___'
       entry.out.compiled.debug.debug:
         criterion:
           debug: debug
