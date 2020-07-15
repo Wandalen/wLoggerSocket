@@ -6,5 +6,5 @@ Inherit class Logger, extending it to receive data from websocket.
 ## Try out
 ```
 npm install
-node sample/Sample.js
+node sample/Sample.s
 ```
