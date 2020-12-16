@@ -256,7 +256,7 @@ function SocketServerOpenWithModuleWebsocket( o )
     {
       debugger;
     });
-    o.httpServer.listen( o.port, function() { } );
+    o.httpServer.listen( /* o.port */ o.serverPath.port, function() { } );
   }
 
   if( o.socketServer === null )
@@ -330,7 +330,7 @@ function SocketServerOpenWithModuleWs( o )
     {
       debugger;
     });
-    o.httpServer.listen( o.port, function() {} );
+    o.httpServer.listen( /* o.port */ o.serverPath.port, function() {} );
   }
 
   if( o.socketServer === null )

@@ -1,3 +1,5 @@
+const { time } = require('console');
+
 ( function _Socket_test_s( )
 {
 
@@ -9,6 +11,7 @@ if( typeof module !== 'undefined' )
   let _ = require( './../../../wtools/Tools.s' );
   _.include( 'wTesting' );
   _.include( 'wFiles' );
+  _.include( 'wConsequence' );
 
   require( './../l1_logger/Socket.s' );
 
@@ -41,20 +44,55 @@ function suiteEnd()
 // Tests
 // --
 
-function SocketServerOpenWithModuleWebsocket( test )
+function basic( test )
 {
-  test.case = 'basic';
-  test.true( 1 );
+  const WebSocket = require( 'ws' );
+  const Http = require( 'http' );
+  let track = [];
+  let ws = null;
+  let ready = new _.Consequence().take( null );
+  let loggerSocket = new _.LoggerSocketReceiver
+  ({
+    httpServer : null,
+    owningHttpServer : 1,
+    serverPath : 'ws://127.0.0.1:15000/.log/',
+  });
+
+  ready.then( () =>
+  {
+    test.case = 'basic';
+    let middleLogger = new _.Logger({ onTransformBegin });
+    loggerSocket.form();
+    loggerSocket.outputTo( middleLogger );
+    test.true( _.printerIs( loggerSocket ) );
+  
+    ws = new WebSocket( 'ws://127.0.0.1:15000' );
+    ws.on( 'open', function open()
+    {
+      ws.send( JSON.stringify( { methodName : 'log', args : [ 'text1', 'text2' ] } ) );
+    });
+
+    return _.time.out( 1000 );
+  })
+
+  ready.then( () =>
+  {
+    test.identical( track, [ 'begin : text1 text2' ] );
+    loggerSocket.finit();
+    ws.close();
+    return null;
+  })
+
+  return ready;
+
+  /* - */
+
+  function onTransformBegin( o )
+  {
+    track.push( 'begin' + ' : '  + o.input[ 0 ] );
+    return o;
+  }
 }
-
-//
-
-function SocketServerOpenWithModuleWs( test )
-{
-  test.case = 'basic';
-  test.true( 1 );
-}
-
 
 //
 
@@ -76,8 +114,7 @@ var Proto =
 
   tests :
   {
-    SocketServerOpenWithModuleWebsocket,
-    SocketServerOpenWithModuleWs,
+    basic
   }
 
 }
