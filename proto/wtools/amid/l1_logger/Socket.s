@@ -1,4 +1,5 @@
-(function _Websocket_s_() {
+(function _Websocket_s_()
+{
 
 'use strict';
 

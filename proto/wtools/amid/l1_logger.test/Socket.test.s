@@ -47,7 +47,6 @@ function suiteEnd()
 function basic( test )
 {
   const WebSocket = require( 'ws' );
-  const Http = require( 'http' );
   let track = [];
   let ws = null;
   let ready = new _.Consequence().take( null );
@@ -61,11 +60,11 @@ function basic( test )
   ready.then( () =>
   {
     test.case = 'basic';
-    let middleLogger = new _.Logger({ onTransformBegin });
+    let middleLogger = new _.Logger({ onWriteEnd });
     loggerSocket.form();
     loggerSocket.outputTo( middleLogger );
     test.true( _.printerIs( loggerSocket ) );
-  
+
     ws = new WebSocket( 'ws://127.0.0.1:15000' );
     ws.on( 'open', function open()
     {
@@ -77,7 +76,7 @@ function basic( test )
 
   ready.then( () =>
   {
-    test.identical( track, [ 'begin : text1 text2' ] );
+    test.identical( track, [ 'end : text1 text2' ] );
     loggerSocket.finit();
     ws.close();
     return null;
@@ -87,9 +86,9 @@ function basic( test )
 
   /* - */
 
-  function onTransformBegin( o )
+  function onWriteEnd( o )
   {
-    track.push( 'begin' + ' : '  + o.input[ 0 ] );
+    track.push( 'end' + ' : ' + o.input[ 0 ] );
     return o;
   }
 }
