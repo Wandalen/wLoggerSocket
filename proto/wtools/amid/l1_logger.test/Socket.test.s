@@ -68,7 +68,7 @@ function basic( test )
     ws = new WebSocket( 'ws://127.0.0.1:15000' );
     ws.on( 'open', function open()
     {
-      ws.send( JSON.stringify( { methodName : 'log', args : [ 'text1', 'text2' ] } ) );
+      ws.send( JSON.stringify({ methodName : 'log', args : [ 'text1', 'text2' ] }) );
     });
 
     return _.time.out( 1000 );
