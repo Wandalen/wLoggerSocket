@@ -1,5 +1,3 @@
-const { time } = require('console');
-
 ( function _Socket_test_s( )
 {
 
