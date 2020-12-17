@@ -3,6 +3,6 @@ let LoggerSocket = require( 'wloggersocket' );
 
 /**/
 
-loggerSocket = new LoggerSocket();
+let loggerSocket = new LoggerSocket();
 loggerSocket.outputTo( console );
 console.log( `Listening "${loggerSocket.serverPath}" ...` );
