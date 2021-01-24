@@ -8,7 +8,7 @@ Inherit class Logger, extending it to receive data from websocket.
 git clone https://github.com/Wandalen/wLoggerSocket
 cd wLoggerSocket
 npm install
-node sample/Sample.s
+node sample/trivial/Sample.s
 ```
 
 ## To add to your project
