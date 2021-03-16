@@ -255,7 +255,6 @@ function SocketServerOpenWithModuleWebsocket( o )
     o.serverPath.port = 80;
     o.httpServer = Http.createServer( function( request, response, next )
     {
-      debugger;
     });
     o.httpServer.listen( /* o.port */ o.serverPath.port, function() { } );
   }
@@ -329,7 +328,6 @@ function SocketServerOpenWithModuleWs( o )
     o.serverPath.port = 80;
     o.httpServer = Http.createServer( function( request, response, next )
     {
-      debugger;
     });
     o.httpServer.listen( /* o.port */ o.serverPath.port, function() {} );
   }
