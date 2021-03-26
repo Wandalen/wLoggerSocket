@@ -18,11 +18,11 @@ if( typeof module !== 'undefined' )
 
 }
 
-let _global = _global_;
-let _ = _global_.wTools;
-let Parent = _.Logger;
-// let Parent = _.LoggerTop; /* Dmytro : deprecated namespace */
-let Self = wLoggerSocketReceiver;
+const _global = _global_;
+const _ = _global_.wTools;
+const Parent = _.Logger;
+// const Parent = _.LoggerTop; /* Dmytro : deprecated namespace */
+const Self = wLoggerSocketReceiver;
 function wLoggerSocketReceiver( o )
 {
   return _.workpiece.construct( Self, this, arguments );
@@ -108,7 +108,7 @@ function form()
 
   // self.SocketServerOpenWithModuleWebsocket( opts );
   self.SocketServerOpenWithModuleWs( opts );
-  _.mapExtend( self, _.mapBut( opts, [ 'onReceive' ] ) );
+  _.mapExtend( self, _.mapBut_( null, opts, [ 'onReceive' ] ) );
 
   /* */
 
