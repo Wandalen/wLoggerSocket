@@ -4,7 +4,7 @@
   "description" : "Inherit class Logger, extending it to receive data from websocket",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
-  "main" : "proto/wtools/amid/l1_logger/Socket.s",
+  "main" : "/pro/module/wLoggerSocket/proto/node_modules/wloggersocket",
   "files" : [ "proto/wtools/amid/l1_logger", "proto/wtools/Tools.s", "proto/node_modules" ],
   "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
   "repository" :
