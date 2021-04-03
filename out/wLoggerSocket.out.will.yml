@@ -2,15 +2,12 @@ format: outwillfile-2.0
 root:
   - wLoggerSocket.out
 consistency:
-  wLoggerSocket.out.will.yml: &ref_0
-    hash: 395f39b63db57b098f53af89c12b16a5
-    size: 37983
-  ../.ex.will.yml: &ref_1
+  ../.ex.will.yml: &ref_0
     hash: 402b71f3a8154f064fa37ed432bc187a
     size: 1752
-  ../.im.will.yml: &ref_2
-    hash: 21eee8b83a10bfccc90d4774d5a47a0d
-    size: 4984
+  ../.im.will.yml: &ref_1
+    hash: 8ccfdd82bf12debef147eb8805b33854
+    size: 4955
 module:
   wLoggerSocket.out:
     about:
@@ -19,19 +16,19 @@ module:
       description: 'Inherit class Logger, extending it to receive data from websocket'
       enabled: 1
       version: 0.4.0
-      interpreters:
+      interpreters: &ref_2
         - njs >= 10.0.0
         - chrome >= 60.0.0
         - firefox >= 60.0.0
-      keywords:
+      keywords: &ref_3
         - tools
         - wTools
       license: MIT
       author: Kostiantyn Wandalen <wanalen@01.school>
-      contributors:
+      contributors: &ref_4
         - Kostiantyn Wandalen <wanalen@01.school>
       npm.name: wloggersocket
-      npm.scripts:
+      npm.scripts: &ref_5
         test: wtest .run proto/**
         docgen: wdocgen .build proto
     path:
@@ -62,7 +59,7 @@ module:
       download:
         criterion:
           predefined: 1
-        path: ../
+        path: ..
       repository:
         path: 'git+https:///github.com/Wandalen/wLoggerSocket.git'
       origins:
@@ -139,6 +136,10 @@ module:
           raw: compiled
           content: prime
         path: '{path::out.*=}/source/Index.s'
+      npm.proto.entry:
+        path:
+          - ../proto/wtools/amid/l1_logger/Socket.s
+          - ../proto/node_modules/wloggersocket
       exported.dir.proto.export:
         criterion:
           generated: 1
@@ -694,24 +695,6 @@ module:
           content: prime
         inherit:
           - files.transpile
-      exported.proto.export:
-        opts:
-          filePath: 'reflector::exported.proto.export'
-        criterion:
-          generated: 1
-          content: proto
-          export: 1
-        inherit:
-          - files.reflect
-      exported.files.proto.export:
-        opts:
-          filePath: 'reflector::exported.files.proto.export'
-        criterion:
-          generated: 1
-          content: proto
-          export: 1
-        inherit:
-          - files.reflect
     build:
       proto.export:
         steps:
@@ -800,9 +783,8 @@ module:
           content: proto
           export: 1
     consistency:
-      wLoggerSocket.out.will.yml: *ref_0
-      ../.ex.will.yml: *ref_1
-      ../.im.will.yml: *ref_2
+      ../.ex.will.yml: *ref_0
+      ../.im.will.yml: *ref_1
   ../:
     about:
       name: wLoggerSocket
@@ -810,21 +792,13 @@ module:
       description: 'Inherit class Logger, extending it to receive data from websocket'
       enabled: 1
       version: 0.4.0
-      interpreters:
-        - njs >= 10.0.0
-        - chrome >= 60.0.0
-        - firefox >= 60.0.0
-      keywords:
-        - tools
-        - wTools
+      interpreters: *ref_2
+      keywords: *ref_3
       license: MIT
       author: Kostiantyn Wandalen <wanalen@01.school>
-      contributors:
-        - Kostiantyn Wandalen <wanalen@01.school>
+      contributors: *ref_4
       npm.name: wloggersocket
-      npm.scripts:
-        test: wtest .run proto/**
-        docgen: wdocgen .build proto
+      npm.scripts: *ref_5
     path:
       module.willfiles:
         criterion:
@@ -853,7 +827,7 @@ module:
       download:
         criterion:
           predefined: 1
-        path: ./
+        path: .
       repository:
         path: 'git+https:///github.com/Wandalen/wLoggerSocket.git'
       origins:
@@ -930,6 +904,10 @@ module:
           raw: compiled
           content: prime
         path: '{path::out.*=}/source/Index.s'
+      npm.proto.entry:
+        path:
+          - proto/wtools/amid/l1_logger/Socket.s
+          - proto/node_modules/wloggersocket
     submodule:
       wTools:
         path: 'npm:///wTools'
@@ -1488,6 +1466,5 @@ module:
         hash: 402b71f3a8154f064fa37ed432bc187a
         size: 1752
       ../.im.will.yml:
-        hash: 21eee8b83a10bfccc90d4774d5a47a0d
-        size: 4984
-      wLoggerSocket.out.will.yml: *ref_0
+        hash: 8ccfdd82bf12debef147eb8805b33854
+        size: 4955
