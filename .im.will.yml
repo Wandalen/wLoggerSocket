@@ -72,8 +72,8 @@ path:
       raw: compiled
       content: prime
   npm.proto.entry:
-    - /pro/module/wLoggerSocket/proto/wtools/amid/l1_logger/Socket.s
-    - /pro/module/wLoggerSocket/proto/node_modules/wloggersocket
+    - proto/wtools/amid/l1_logger/Socket.s
+    - proto/node_modules/wloggersocket
 reflector:
   reflect.proto:
     inherit: predefined.*
