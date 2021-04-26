@@ -31,7 +31,7 @@ function wLoggerSocketReceiver( o )
 Self.shortName = 'LoggerSocketReceiver';
 
 // --
-// routines
+// implementation
 // --
 
 function finit()
@@ -108,7 +108,7 @@ function form()
 
   // self.SocketServerOpenWithModuleWebsocket( opts );
   self.SocketServerOpenWithModuleWs( opts );
-  _.mapExtend( self, _.mapBut_( null, opts, [ 'onReceive' ] ) );
+  _.props.extend( self, _.mapBut_( null, opts, [ 'onReceive' ] ) );
 
   /* */
 
@@ -241,7 +241,7 @@ function _queLog( que, beforeTime )
 function SocketServerOpenWithModuleWebsocket( o )
 {
 
-  _.routineOptions( SocketServerOpenWithModuleWebsocket, arguments );
+  _.routine.options_( SocketServerOpenWithModuleWebsocket, arguments );
 
   let WebSocketServer = require( 'websocket' ).server;
   let Http = require( 'http' );
@@ -314,7 +314,7 @@ SocketServerOpenWithModuleWebsocket.defaults =
 function SocketServerOpenWithModuleWs( o )
 {
 
-  _.routineOptions( SocketServerOpenWithModuleWs, arguments );
+  _.routine.options_( SocketServerOpenWithModuleWs, arguments );
 
   let Ws = require( 'ws' );
   let Http = require( 'http' );
