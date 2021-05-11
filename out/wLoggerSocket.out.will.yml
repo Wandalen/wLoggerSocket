@@ -2,13 +2,10 @@ format: outwillfile-2.0
 root:
   - wLoggerSocket.out
 consistency:
-  wLoggerSocket.out.will.yml: &ref_0
-    hash: 1670736f27a4fab178ae3891215a43cd
-    size: 38366
-  ../.ex.will.yml: &ref_1
+  ../.ex.will.yml: &ref_0
     hash: 402b71f3a8154f064fa37ed432bc187a
     size: 1752
-  ../.im.will.yml: &ref_2
+  ../.im.will.yml: &ref_1
     hash: fdf8d14d5051ed2eb1a62e71cc2aa679
     size: 4903
 module:
@@ -19,19 +16,19 @@ module:
       description: 'Inherit class Logger, extending it to receive data from websocket'
       enabled: 1
       version: 0.4.0
-      interpreters:
+      interpreters: &ref_2
         - njs >= 10.0.0
         - chrome >= 60.0.0
         - firefox >= 60.0.0
-      keywords:
+      keywords: &ref_3
         - tools
         - wTools
       license: MIT
       author: Kostiantyn Wandalen <wanalen@01.school>
-      contributors:
+      contributors: &ref_4
         - Kostiantyn Wandalen <wanalen@01.school>
       npm.name: wloggersocket
-      npm.scripts:
+      npm.scripts: &ref_5
         test: wtest .run proto/**
         docgen: wdocgen .build proto
     path:
@@ -698,24 +695,6 @@ module:
           content: prime
         inherit:
           - files.transpile
-      exported.proto.export:
-        opts:
-          filePath: 'reflector::exported.proto.export'
-        criterion:
-          generated: 1
-          content: proto
-          export: 1
-        inherit:
-          - files.reflect
-      exported.files.proto.export:
-        opts:
-          filePath: 'reflector::exported.files.proto.export'
-        criterion:
-          generated: 1
-          content: proto
-          export: 1
-        inherit:
-          - files.reflect
     build:
       proto.export:
         steps:
@@ -804,9 +783,8 @@ module:
           content: proto
           export: 1
     consistency:
-      wLoggerSocket.out.will.yml: *ref_0
-      ../.ex.will.yml: *ref_1
-      ../.im.will.yml: *ref_2
+      ../.ex.will.yml: *ref_0
+      ../.im.will.yml: *ref_1
   ../:
     about:
       name: wLoggerSocket
@@ -814,21 +792,13 @@ module:
       description: 'Inherit class Logger, extending it to receive data from websocket'
       enabled: 1
       version: 0.4.0
-      interpreters:
-        - njs >= 10.0.0
-        - chrome >= 60.0.0
-        - firefox >= 60.0.0
-      keywords:
-        - tools
-        - wTools
+      interpreters: *ref_2
+      keywords: *ref_3
       license: MIT
       author: Kostiantyn Wandalen <wanalen@01.school>
-      contributors:
-        - Kostiantyn Wandalen <wanalen@01.school>
+      contributors: *ref_4
       npm.name: wloggersocket
-      npm.scripts:
-        test: wtest .run proto/**
-        docgen: wdocgen .build proto
+      npm.scripts: *ref_5
     path:
       module.willfiles:
         criterion:
@@ -1498,4 +1468,3 @@ module:
       ../.im.will.yml:
         hash: fdf8d14d5051ed2eb1a62e71cc2aa679
         size: 4903
-      wLoggerSocket.out.will.yml: *ref_0
