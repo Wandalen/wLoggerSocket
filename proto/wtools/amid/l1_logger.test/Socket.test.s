@@ -116,7 +116,7 @@ const Proto =
 
 }
 
-_.props.extend( Self, Proto );
+// _.props.extend( Self, Proto );
 
 //
 
