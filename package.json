@@ -1,11 +1,11 @@
 {
   "name" : "wloggersocket",
-  "version" : "0.3.125",
+  "version" : "0.3.126",
   "description" : "Inherit class Logger, extending it to receive data from websocket",
   "author" : "Kostiantyn Wandalen <wanalen@01.school>",
   "license" : "MIT",
   "main" : "proto/node_modules/wloggersocket",
-  "files" : [ "proto/wtools/amid/l1_logger", "proto/node_modules" ],
+  "files" : [ "proto/wtools/amid/l1_logger", "proto/node_modules", "proto/node_modules/Tools", "proto/node_modules/wloggersocket" ],
   "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
   "repository" :
   {
