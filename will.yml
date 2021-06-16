@@ -294,7 +294,7 @@ submodule:
     path: 'npm:///wuribasic'
     enabled: 0
   ws:
-    path: 'npm:///ws#7.3.0'
+    path: 'npm:///ws#7.4.6'
     enabled: 0
   eslint:
     path: 'npm:///eslint#7.1.0'
