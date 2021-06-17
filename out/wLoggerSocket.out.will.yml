@@ -3,7 +3,7 @@ root:
   - wLoggerSocket.out
 consistency:
   ../will.yml: &ref_0
-    hash: 2f9e3809a82c44ab4e7a94a3d255b419
+    hash: 5facf59a13a1dd6c60c244156556e1b2
     size: 6411
 module:
   wLoggerSocket.out:
@@ -172,7 +172,7 @@ module:
         autoExporting: 0
         enabled: 0
       ws:
-        path: 'npm:///ws#7.3.0'
+        path: 'npm:///ws#7.4.6'
         autoExporting: 0
         enabled: 0
       eslint:
@@ -910,7 +910,7 @@ module:
         autoExporting: 0
         enabled: 0
       ws:
-        path: 'npm:///ws#7.3.0'
+        path: 'npm:///ws#7.4.6'
         autoExporting: 0
         enabled: 0
       eslint:
@@ -1451,5 +1451,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: 2f9e3809a82c44ab4e7a94a3d255b419
+        hash: 5facf59a13a1dd6c60c244156556e1b2
         size: 6411
