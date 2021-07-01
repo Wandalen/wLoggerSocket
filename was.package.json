@@ -1,28 +1,38 @@
 {
-  "name" : "wloggersocket",
-  "version" : "0.3.127",
-  "description" : "Inherit class Logger, extending it to receive data from websocket",
-  "author" : "Kostiantyn Wandalen <wanalen@01.school>",
-  "license" : "MIT",
-  "main" : "proto/node_modules/wloggersocket",
-  "files" : [ "proto/wtools/amid/l1_logger", "proto/node_modules", "proto/node_modules/Tools", "proto/node_modules/wloggersocket" ],
-  "scripts" : { "test" : "wtest .run 'proto/**' rapidity:-3", "docgen" : "wdocgen .build proto" },
-  "repository" :
-  {
-    "type" : "git",
-    "url" : "https ://github.com/Wandalen/wLoggerSocket.git"
+  "name": "wloggersocket",
+  "version": "0.3.128",
+  "description": "Inherit class Logger, extending it to receive data from websocket",
+  "author": "Kostiantyn Wandalen <wanalen@01.school>",
+  "license": "MIT",
+  "main": "proto/node_modules/wloggersocket",
+  "files": [
+    "proto/wtools/amid/l1_logger",
+    "proto/node_modules",
+    "proto/node_modules/Tools",
+    "proto/node_modules/wloggersocket"
+  ],
+  "scripts": {
+    "test": "wtest .run 'proto/**' rapidity:-3",
+    "docgen": "wdocgen .build proto"
   },
-  "bugs" :
-  {
-    "url" : "https ://github.com/Wandalen/wLoggerSocket/issues"
+  "repository": {
+    "type": "git",
+    "url": "https ://github.com/Wandalen/wLoggerSocket.git"
   },
-  "dependencies" :
-  {
-    "wTools" : "",
-    "wLogger" : "",
-    "wuribasic" : "",
-    "ws" : "7.4.6"
+  "bugs": {
+    "url": "https ://github.com/Wandalen/wLoggerSocket/issues"
   },
-  "devDependencies" : { "wTesting" : "", "eslint" : "7.1.0" },
-  "keywords" : [ "wTools" ]
+  "dependencies": {
+    "wuribasic": "",
+    "wTools": "",
+    "ws": "7.4.6",
+    "wLogger": ""
+  },
+  "devDependencies": {
+    "wTesting": "",
+    "eslint": "7.1.0"
+  },
+  "keywords": [
+    "wTools"
+  ]
 }
