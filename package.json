@@ -1,6 +1,6 @@
 {
   "name": "wloggersocket",
-  "version": "0.3.143",
+  "version": "0.3.144",
   "description": "Inherit class Logger, extending it to receive data from websocket",
   "author": "Kostiantyn Wandalen <wanalen@01.school>",
   "license": "MIT",
@@ -23,13 +23,13 @@
     "url": "https ://github.com/Wandalen/wLoggerSocket/issues"
   },
   "dependencies": {
-    "wuribasic": "delta",
-    "wTools": "delta",
+    "wuribasic": "gamma",
+    "wTools": "gamma",
     "ws": "7.4.6",
-    "wLogger": "delta"
+    "wLogger": "gamma"
   },
   "devDependencies": {
-    "wTesting": "delta",
+    "wTesting": "gamma",
     "eslint": "7.1.0"
   },
   "keywords": [
