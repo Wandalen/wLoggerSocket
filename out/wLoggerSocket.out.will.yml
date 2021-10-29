@@ -3,8 +3,8 @@ root:
   - wLoggerSocket.out
 consistency:
   ../will.yml: &ref_0
-    hash: 5facf59a13a1dd6c60c244156556e1b2
-    size: 6411
+    hash: a09c7a65d0e28f08e7765da8278056fe
+    size: 6270
 module:
   wLoggerSocket.out:
     about:
@@ -362,9 +362,6 @@ module:
           content: npm
         inherit:
           - module.export
-      npm.publish:
-        opts:
-          shell: npm publish
       npm.generate.debug.raw:
         opts:
           entryPath: 'path::entry.out.*=1'
@@ -700,12 +697,6 @@ module:
           - 'step::doc.export'
         criterion:
           content: doc
-          export: 1
-      npm.export:
-        steps:
-          - 'step::npm.publish'
-        criterion:
-          content: npm
           export: 1
       export:
         steps:
@@ -1049,9 +1040,6 @@ module:
           content: npm
         inherit:
           - module.export
-      npm.publish:
-        opts:
-          shell: npm publish
       npm.generate.debug.raw:
         opts:
           entryPath: 'path::entry.out.*=1'
@@ -1388,12 +1376,6 @@ module:
         criterion:
           content: doc
           export: 1
-      npm.export:
-        steps:
-          - 'step::npm.publish'
-        criterion:
-          content: npm
-          export: 1
       export:
         steps:
           - 'build::proto.export'
@@ -1451,5 +1433,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: 5facf59a13a1dd6c60c244156556e1b2
-        size: 6411
+        hash: a09c7a65d0e28f08e7765da8278056fe
+        size: 6270
