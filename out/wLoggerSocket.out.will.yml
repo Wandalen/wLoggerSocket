@@ -3,8 +3,8 @@ root:
   - wLoggerSocket.out
 consistency:
   ../will.yml: &ref_0
-    hash: a09c7a65d0e28f08e7765da8278056fe
-    size: 6270
+    hash: de96340bcca602849bbd9f3555e1f34c
+    size: 6278
 module:
   wLoggerSocket.out:
     about:
@@ -1433,5 +1433,5 @@ module:
           - 'build::npm'
     consistency:
       ../will.yml:
-        hash: a09c7a65d0e28f08e7765da8278056fe
-        size: 6270
+        hash: de96340bcca602849bbd9f3555e1f34c
+        size: 6278
