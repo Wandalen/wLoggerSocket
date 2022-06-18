@@ -1,6 +1,6 @@
 {
   "name": "wloggersocket",
-  "version": "0.3.166",
+  "version": "0.3.167",
   "description": "Inherit class Logger, extending it to receive data from websocket",
   "author": "Kostiantyn Wandalen <wandalen@obox.systems>",
   "license": "MIT",
